@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>ZapAfiliados - Puxador Automático</title>
+  <style>
+    body {
+      width: 360px;
+      margin: 0;
+      padding: 16px;
+      background: #090d16;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      box-sizing: border-box;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 10px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-weight: 800;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      cursor: pointer;
+    }
+    .badge-offline {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .title {
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+    .card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .product-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .product-img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #020617;
+      flex-shrink: 0;
+    }
+    .product-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      max-height: 32px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .prices {
+      margin-top: 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .promo-price {
+      font-size: 15px;
+      font-weight: 900;
+      color: #10b981;
+    }
+    .orig-price {
+      font-size: 11px;
+      color: #64748b;
+      text-decoration: line-through;
+    }
+    .disc-badge {
+      font-size: 10px;
+      font-weight: 900;
+      background: #f43f5e;
+      color: #fff;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .achadinho-preview {
+      background: #062319;
+      border: 1px solid #059669;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #e2e8f0;
+      max-height: 130px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-bottom: 12px;
+    }
+    .btn {
+      width: 100%;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #020617;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      opacity: 0.95;
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: #1e293b;
+      color: #f1f5f9;
+      font-size: 11px;
+      padding: 8px;
+      border: 1px solid #334155;
+      box-shadow: none;
+    }
+    .btn-secondary:hover {
+      background: #334155;
+    }
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .status-msg {
+      font-size: 11px;
+      margin-top: 8px;
+      text-align: center;
+      min-height: 16px;
+      font-weight: 700;
+    }
+    .input-group {
+      margin-bottom: 8px;
+    }
+    .input-label {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+    .input {
+      width: 100%;
+      box-sizing: border-box;
+      background: #020617;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: #fff;
+      font-size: 11px;
+      outline: none;
+    }
+    .input:focus {
+      border-color: #10b981;
+    }
+    .server-status-box {
+      font-size: 10px;
+      background: #020617;
+      border: 1px solid #1e293b;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      word-break: break-all;
+      color: #94a3b8;
+    }
+    .footer {
+      font-size: 10px;
+      color: #64748b;
+      text-align: center;
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer a {
+      color: #10b981;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-box">
+      <div style="width: 24px; height: 24px; border-radius: 6px; background: #10b981; color: #000; font-weight: 900; display: flex; align-items: center; justify-content: center;">🔥</div>
+      <span class="title">ZapAfiliados Puxador</span>
+    </div>
+    <span class="badge" id="conn-badge" title="Clique para reconectar">Verificando...</span>
+  </div>
+
+  <!-- Product Detected Card -->
+  <div class="card" id="product-card">
+    <div class="product-box">
+      <img id="popup-img" class="product-img" src="" style="display: none;" />
+      <div style="min-width: 0; flex: 1;">
+        <div id="popup-title" class="product-title">Detectando produto na página...</div>
+        <div class="prices">
+          <span id="popup-promo" class="promo-price"></span>
+          <span id="popup-orig" class="orig-price"></span>
+          <span id="popup-disc" class="disc-badge" style="display: none;"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achadinho Text Preview -->
+    <div class="input-label" style="display: flex; justify-content: space-between;">
+      <span>Mensagem Formatada para o Robô:</span>
+      <span style="color: #10b981;">Link Encurtado</span>
+    </div>
+    <div id="popup-achadinho-preview" class="achadinho-preview">Aguardando dados do produto...</div>
+
+    <!-- BOTAO PRINCIPAL: PUXAR DIRETO PARA O ZAPAFILIADOS (SEM PRECISAR COPIAR E COLAR) -->
+    <button class="btn" id="send-zap-btn">
+      <span>🚀 Puxar Direto para o ZapAfiliados</span>
+    </button>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="open-app-btn" style="flex: 1;">
+        <span>📱 Abrir Painel do Robô</span>
+      </button>
+      <button class="btn btn-secondary" id="download-img-btn" style="flex: 1;">
+        <span>🖼️ Baixar 1ª Foto</span>
+      </button>
+    </div>
+
+    <div id="status-msg" class="status-msg"></div>
+  </div>
+
+  <!-- Quick Settings Accordion -->
+  <div class="card" style="margin-bottom: 0;">
+    <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" id="toggle-settings-btn">
+      <span style="font-size: 11px; font-weight: 700; color: #94a3b8;">⚙️ Configuração do Servidor e Tags</span>
+      <span style="font-size: 11px; color: #64748b;">▼</span>
+    </div>
+
+    <div id="settings-panel" style="display: none; margin-top: 10px; border-top: 1px solid #1e293b; padding-top: 10px;">
+      <div class="input-group">
+        <div class="input-label">URL do Servidor ZapAfiliados:</div>
+        <input type="text" id="server-url-input" class="input" placeholder="https://ais-dev-qcpu3mytpcrtr2fmdyiv6a-602903723241.us-east1.run.app">
+      </div>
+
+      <div class="server-status-box" id="detected-server-info">
+        Detectando servidor automaticamente...
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Mercado Livre Tag (tracking_id):</div>
+        <input type="text" id="meli-tag-input" class="input" placeholder="afiliado_zap_vip">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Shopee Affiliate ID:</div>
+        <input type="text" id="shopee-tag-input" class="input" placeholder="shopee_vip_123">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Amazon Associate Tag:</div>
+        <input type="text" id="amazon-tag-input" class="input" placeholder="achadoszap-20">
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-secondary" id="auto-detect-btn" style="flex: 1; font-weight: 700;">
+          🔍 Auto-detectar Aba
+        </button>
+        <button class="btn btn-secondary" id="save-settings-btn" style="flex: 1; background: #10b981; color: #000; font-weight: 800;">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>O ZapAfiliados fará o envio nos grupos</span>
+    <a href="#" id="open-dashboard-link">Abrir Painel ↗</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

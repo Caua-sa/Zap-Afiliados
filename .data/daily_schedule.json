@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-06",
+  "isActive": true,
+  "intervalMinutes": 90,
+  "startHour": "09:00",
+  "endHour": "21:30",
+  "slots": []
+}

@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "ZapAfiliados - Achadinhos WhatsApp Extrator",
+  "version": "1.3.0",
+  "description": "Extrator automático de link de afiliado, foto, nome e preço do Mercado Livre, Shopee e Amazon no estilo Achadinhos do WhatsApp com anti-duplicação.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "clipboardWrite",
+    "downloads"
+  ],
+  "host_permissions": [
+    "*://*.mercadolivre.com.br/*",
+    "*://*.mercadolivre.com/*",
+    "*://*.shopee.com.br/*",
+    "*://*.shopee.com/*",
+    "*://*.amazon.com.br/*",
+    "*://*.amazon.com/*",
+    "http://localhost:3000/*",
+    "http://127.0.0.1:3000/*",
+    "*://*/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ZapAfiliados - Achadinhos WhatsApp"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mercadolivre.com.br/*",
+        "*://*.mercadolivre.com/*",
+        "*://*.shopee.com.br/*",
+        "*://*.shopee.com/*",
+        "*://*.amazon.com.br/*",
+        "*://*.amazon.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

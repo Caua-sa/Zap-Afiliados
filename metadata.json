@@ -1,0 +1,6 @@
+{
+  "name": "ZapAfiliados - Bot Divulgador Automático WhatsApp",
+  "description": "Robô divulgador de links de afiliados (Mercado Livre, Shopee e outros) para grupos de WhatsApp com Baileys QR Code, anti-spam inteligente, agendamento de postagens e cálculo de margens de lucro.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
